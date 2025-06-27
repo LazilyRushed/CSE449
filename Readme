@@ -1,2 +1,65 @@
-CSE449 Project
-Name: Rushayed Ali Faiaz
+The HyperLogLog algorithm is designed to estimate the cardinality
+(number of distinct elements) of a large dataset using a compact data structure called a HyperLogLog
+sketch. The algorithm works by hashing each element of the dataset and using the leading zeros in the
+hash values to estimate the cardinality.
+
+Parallel Processing Requirement: When dealing with large datasets, it's often necessary to leverage
+parallel processing to speed up computations. In the context of estimating cardinality using HyperLogLog,
+parallel processing can be used to compute partial sketches for different partitions of the data in parallel.
+
+Combining Partial Sketches: Since each partial sketch represents an estimation of cardinality for a portion
+of the data, it's necessary to combine these partial sketches to obtain an accurate estimation for the entire dataset.
+This merging process involves aggregating the information from all partial sketches into a single combined sketch.
+
+Update Operation in HyperLogLog: The HyperLogLog data structure supports an "update" operation, which allows
+merging two sketches together. This operation combines the information from both sketches to produce a new sketch
+that represents the union of the original sketches.
+
+As the number of processes increases, the computation time may initially dip then rise.
+This is because of the processes are being equally distributed over the cores/processors
+of your computer. So, it very much depends on what your computer can handle.
+
+#Data Visualization:
+
+UnitPrice (Mean):
+
+Reasoning: The mean UnitPrice provides an average value of the price for each transaction made by a customer.
+
+Justification: Taking the mean helps to smooth out any fluctuations in individual transaction prices. It
+provides a representative value of how much, on average, a customer spends per unit of product.
+
+Quantity (Sum):
+
+Reasoning: Summing the Quantity gives the total quantity of items purchased by a customer across all
+transactions.
+
+Justification: By summing the Quantity, we capture the total volume of products bought by each customer.
+This helps us understand the overall purchasing behavior and volume of products consumed by each customer.
+
+StockCode (Count):
+
+Reasoning: Counting the occurrences of StockCode gives the total number of unique products purchased by a
+customer.
+
+Justification: Counting the occurrences of StockCode provides insight into the variety of products purchased
+by each customer. It indicates how many different types of products were bought, which can be indicative of
+customer preferences or shopping habits.
+
+Features = ['InvoiceNo', 'StockCode', 'Description', 'Quantity', 'InvoiceDate', 'UnitPrice', 'CustomerID', 'Country']
+
+#FUTURE PLANS/POTENTIAL USE: Evaluating row-wise cardinality as opposed to column-wise cardinality
+
+#The Problem:
+Computational Complexity: Calculating the cardinality for each row can significantly increase
+computational complexity, especially for large datasets. This approach might not be feasible
+for datasets with millions of rows.
+
+#The Solution:
+Parallelization Demonstration: By parallelizing the computation of HyperLogLog sketches at
+the row level, you can demonstrate the effectiveness of parallel processing in handling large
+volumes of transaction data efficiently. This showcases the scalability and performance
+benefits of parallelization techniques.
+
+Performance Evaluation: Comparing the performance of parallelized row-level cardinality
+computation with traditional single-threaded or column-level approaches can provide insights
+into the efficiency gains achieved through parallelization.
